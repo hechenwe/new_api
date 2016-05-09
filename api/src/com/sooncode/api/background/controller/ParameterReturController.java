@@ -1,7 +1,8 @@
 package com.sooncode.api.background.controller;
 
 import java.util.Date;
- 
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.sooncode.api.background.entity.ParameterRetur;
 import com.sooncode.api.background.service.ParameterReturService;
@@ -29,8 +31,8 @@ public class ParameterReturController {
 	private ParameterReturService parameterReturService;
 
 	@RequestMapping("/saveParameterRetur")
-	@ResponseBody
-	public String saveParameterRetur(HttpServletRequest request, HttpSession session) {
+	 
+	public ModelAndView saveParameterRetur(HttpServletRequest request, HttpSession session) {
 	 
 		String exampleId = request.getParameter("exampleId").trim().replace("-", "");
 		String parameterId = request.getParameter("parameterId").trim().replace("-", "");
@@ -61,7 +63,31 @@ public class ParameterReturController {
 		 
 
 		long n = parameterReturService.parameterReturDao.save(pr);
-		if (n == 1) return "1";
-		return "0";
+		Map<String,Object> map = new HashMap<>();
+		map.put("p", pr);
+		return new ModelAndView("parameter_return/table_tr_return_parameter",map);
 	}
+	
+	/**
+	 * 删除 返回值 参数
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/deleteParameterRetur")
+	@ResponseBody
+	public String deleteParameterRetur(HttpServletRequest request, HttpSession session) {
+		String parameterId = request.getParameter("parameterId");
+		ParameterRetur pr = new ParameterRetur();
+		pr.setParameterId(parameterId);
+		Integer n = parameterReturService.parameterReturDao.delete(pr);
+		
+		if(n == 1){
+			return "1";
+		}else{
+			return "0";
+		}
+		
+	}
+	
 }

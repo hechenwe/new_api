@@ -39,15 +39,15 @@
 					<th><small>示例</small></th>
 
 					<th width="8%"><small>是否必须</small></th>
-					<th><small>约束</small></th>
+					<th><small>域</small></th>
 					<!-- <th width="6%"><small>操作</small></th> -->
 					 
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id = "parameter_return${example.exampleId}">
 				<#list example.parameterReturs as p >
 
-				<tr height="20px">
+				<tr id="${p.parameterId}" class="parameter_return_tr_js"  data-key="${example.exampleId}:${p.parameterId}" data-toggle="context" data-target="#context-menu" height="20px">
 					<td>${p.parameterName}</td>
 					<td>${p.parameterCode}</td>
 					<td>${p.parameterDataType}</td>
@@ -79,12 +79,9 @@
 							</select>
 						</div> 
 						</#if>
-						<img style="float: left; margin-top: 7px;" onclick="openOrCloseValueExplain('${p.parameterId}','${example.exampleId}');" src="../images/add.png">
+						<!-- <img style="float: left; margin-top: 7px;" onclick="openOrCloseValueExplain('${p.parameterId}','${example.exampleId}');" src="../images/add.png"> -->
 					</td>
-					 <!-- <td>
-						 <p onclick="" style=" color:#627CBE;" class="fa fa-edit"></p> &nbsp;&nbsp;&nbsp;
-						 <p onclick="" style=" color:#627CBE;" class="fa fa-trash-o"></p>
-					 </td> -->
+					 
 				</tr>
 				</#list>
 			</tbody>
@@ -95,7 +92,7 @@
 	<!-- <p>
 		<a onclick="openOrColseEaxmpleReturn('${example.exampleId}');"><img src="../images/add.png"></img>添加返回值参数</a>
 	</p> -->
-	<#include "../add/add_parameter_return.html"/>
+	<#include "../parameter_return/add_parameter_return.html"/>
 		<!------------------------ 返回值参数---------------------------- -->
 
 	<#include "../add/add_value_explain.html"/>
@@ -110,6 +107,17 @@
 	<li><a onclick="deleteExample();">删除返回示例</a></li>
 	<li><a onclick="openOrColseEaxmpleReturn();">添加返回值参数</a></li>
 </ul>
+
+
+<ul id="parameter-return-ul-id" hidden="hidden">
+	 
+	<li><a onclick=" ();">修改返回值参数</a></li>
+	<li><a onclick="deleteParameterReturn();">删除返回值参数</a></li>
+	<li><a onclick=" ();">添加返回值参数域</a></li>
+</ul>
+
+
+
 <script type="text/javascript">
 function returnMousedown() {
 	 
@@ -128,5 +136,24 @@ function returnMousedown() {
 	});
 }
 
+
+function parameterReturnMousedown() {
+	 
+	$('.parameter_return_tr_js').mousedown(function(e) {
+		 
+		if (3 == e.which) { //这 是右键单击事件
+			var lis = $("#parameter-return-ul-id").html();
+			var ul = $("#context-menu-ul");
+			ul.empty();
+			ul.append(lis);
+	
+			var key = $(this).attr("data-key");
+			$("#context-menu").attr("data-key", key);
+	
+		}
+	});
+}
+
 returnMousedown();
+parameterReturnMousedown();
 </script>
