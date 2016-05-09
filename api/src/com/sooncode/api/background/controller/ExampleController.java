@@ -57,7 +57,7 @@ public class ExampleController {
 		Map<String,Object> map = new HashMap<>();
 		map.put("example",e);
 		
-		return new ModelAndView("ed/div_example",map);
+		return new ModelAndView("example/div_example",map);
 	}
 	
 	
@@ -125,6 +125,6 @@ public class ExampleController {
 		e.setExampleId(exampleId);
 		e =   exampleServic.exampleDao.get(e);
 		map.put("example",e);
-		return new ModelAndView("update/up_example",map);
+		return new ModelAndView("example/up_example",map);
 	}
 }

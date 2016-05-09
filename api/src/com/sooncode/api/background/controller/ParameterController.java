@@ -27,11 +27,10 @@ public class ParameterController {
 	@Autowired
 	private ParameterService parameterService;
 
-	// @Autowired
-	// private ProjectServiceBG projectServiceBG;
+	 
 	@RequestMapping("/saveParameter")
-	@ResponseBody
-	public String saveParameter(HttpServletRequest request, HttpSession session) {
+	 
+	public ModelAndView saveParameter(HttpServletRequest request, HttpSession session) {
 
 		String interfacId = request.getParameter("interfacId");
 		String parameterId = request.getParameter("parameterId");
@@ -62,22 +61,22 @@ public class ParameterController {
 			weight = weight + 1;
 		}
 		p.setWeight(weight);
-		long n = 0;
+		 
 		if(type != null && type.equals("UPDATE")){
-			p.setParameterId(parameterId);
-			n = parameterService.parameterDao.update(p);
+			 p.setParameterId(parameterId);
+			 parameterService.parameterDao.update(p);
+			 Parameter newP = new Parameter();
+			 newP.setParameterId(parameterId);
+			 p = parameterService.parameterDao.get(newP);
 		}else{
 			
 			p.setParameterId(parameterId.replace("-", ""));
 			p.setInterfacId(interfacId.replace("-", ""));
-			n = parameterService.parameterDao.save(p);
+			 parameterService.parameterDao.save(p);
 		}
-		  
-		if (n == 1) {
-			return "1";
-		} else {
-			return "0";
-		}
+		  Map<String,Object> map = new HashMap<>();
+		  map.put("parameter",p);
+		return new ModelAndView("parameter/table_tr_parameter",map);
 
 	}
 
@@ -104,7 +103,7 @@ public class ParameterController {
 		p = parameterService.parameterDao.get(p);
 		Map<String, Object> map = new HashMap<>();
 		map.put("parameter", p);
-		return new ModelAndView("update/up_parameter", map);
+		return new ModelAndView("parameter/up_parameter", map);
 
 	}
 }

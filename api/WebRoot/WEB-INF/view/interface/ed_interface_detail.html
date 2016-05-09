@@ -25,26 +25,26 @@
 			</#if>
 
 				<div class="div-display" id="div_parameter${interfac.interfacId}">
-					<#include "../add/add_parameter_json.html"/>
+					<#include "../parameter/add_parameter_json.html"/>
 				</div>
 	<#else> 
-			<#include "../ed/table_parameter.html"/>
+			<#include "../parameter/table_parameter.html"/>
 			<div class="div-display" id="div_parameter${interfac.interfacId}">
-			<#include "../add/add_parameter.html"/>
+			<#include "../parameter/add_parameter.html"/>
 			</div>
 			<div id="up-parameter${interfac.interfacId}"></div>
 	</#if>
 	<#--添加参数的约束 -->
 	<div class="div-display" id="div_parameter_constraint_${interfac.interfacId}">
 	
-	<#include "../add/add_parameter_constraint.html"/></div>
+	<#include "../parameter_constraint/add_parameter_constraint.html"/></div>
 	<#-- 参数  结束 -->
 
 	<#--  返回示例  开始 -->
 	
 		<h6><img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp; <b><a ondblclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')">返回示例 :</a></b>&nbsp;&nbsp;</h6>
 
-	<#include "../add/add_example.html"/>
+	<#include "../example/add_example.html"/>
 	<#--  添加返回示例 -->
 
 	<#------------------- 返回值示例 ---------------结束 -->

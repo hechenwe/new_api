@@ -56,3 +56,40 @@ function deleteParameter() {
 	
 	}	  
 }
+
+
+//-----------------------------------------------------保存保存参数----------------------------------------------
+function saveParameter() {
+	var projectId = $("#input_projectId").val();
+	var interfacId = $("#interfacId").val();
+ 
+	var parameterId = Math.uuid();//.replace(/-/gm,'');
+	var parameterName = $("#parameterName").val();
+	var parameterCode = $("#parameterCode").val();
+	var minLength = $("#minLength").val();
+	var maxLength = $("#maxLength").val();
+	var parameterExample = $("#parameterExample").val();
+	var parameterExplain = $("#parameterExplain").val();
+	var weight = $("#weight").val();
+	var parameterDataType = $("#parameterDataType").val();
+	var isMust = $('input[name="isMust"]:checked').val();
+
+	var urlString = "../parameter/saveParameter.html?projectId=" + projectId;
+	urlString = urlString + "&interfacId=" + interfacId + "&parameterId=" + parameterId + "&parameterName=" + parameterName + "&parameterCode=" + parameterCode + "&minLength=" + minLength;
+	urlString = urlString + "&maxLength=" + maxLength + "&parameterExample=" + parameterExample + "&parameterExplain=" + parameterExplain + "&weight=" + weight;
+	urlString = urlString + "&parameterDataType=" + parameterDataType + "&isMust=" + isMust;
+	//alert(urlString);
+
+	$.get(urlString, function(data) {
+
+			$("#tbody-" + interfacId).append(data);
+			//alert("保存参数成功!");
+			var forms = $("#form");
+			for (var i = 0; i < forms.length; i++) {
+				forms[i].reset();
+
+			}
+		 
+
+	})
+}

@@ -14,13 +14,10 @@
 							<div class="form-group">
 								<input id="parameterCode-${parameter.parameterId}" value="${parameter.parameterCode}" class="form-control" placeholder="参数代码">
 							</div>
-							<div class="form-group">
-								<textarea id="parameterExplain-${parameter.parameterId}"   class="form-control" rows="3" placeholder="参数说明">${parameter.parameterExplain}</textarea>
-							</div>
+						 
 							<div class="form-group">
 
 								<select class="form-control" id="parameterDataType-${parameter.parameterId}" onchange="chooseDataType(this);" placeholder="数据类型">
-									<option value="String">--请选择数据类型--</option>
 									<option value="String">String</option>
 									<option value="Integer">Integer</option>
 									<option value="Long">Long</option>
@@ -29,10 +26,10 @@
 								</select>
 							</div>
 							<div id="div-minLength" class="form-group">
-								<input id="minLength-${parameter.parameterId}" class="form-control" placeholder="最小长度 " value="1">
+								<input id="minLength-${parameter.parameterId}" class="form-control" placeholder="最小长度 " value="${parameter.minLength}">
 							</div>
 							<div id="div-maxLength" class="form-group">
-								<input onchange="choosMaxLength(this);" id="maxLength-${parameter.parameterId}" class="form-control" placeholder="最大长度 " value="1">
+								<input onchange="choosMaxLength(this);" id="maxLength-${parameter.parameterId}" class="form-control" placeholder="最大长度 " value="${parameter.maxLength}">
 							</div>
 							<div id="div-example-${parameter.parameterId}" class="form-group">
 								<input id="parameterExample-${parameter.parameterId}" value="${parameter.parameterExample}" class="form-control" placeholder="示例">
@@ -42,9 +39,7 @@
 								</label> <label class="radio-inline"> <input type="radio" name="isMust" value="0"><small>可选</small>
 								</label>
 							</div>
-							<!-- <div class="form-group">
-								<input id="weight" class="form-control" placeholder="权重  用于排序">
-							</div> -->
+							 
 							<button onclick="updateParameter('${parameter.parameterId}','${parameter.interfacId}');" type="button" class="btn btn-default">确定</button>
 							 
 							<button type="button" onclick="closeParameterDiv('${parameter.interfacId}');" class="btn btn-default">关闭</button>
@@ -112,21 +107,9 @@
 
 		$.get(urlString, function(data) {
 			 
-			if (data == "1") {//添加成功
-				
-				var tr = '<tr id="tr-'+parameterId+'">' + '<td>' + parameterName + '</td>' + '<td>' + parameterCode + '</td>' + '<td>' + parameterDataType + '</td>' +
-							'<td>' + minLength + ' - ' + maxLength + '</td>' + '<td> ' + parameterExample + '</td>' + '<td>' + '<div class="col-lg-8">' + '<select id="select_'+parameterId+'" class="form-control input-sm div-display ">' + '</select>' + '</div class="col-lg-4"> <img onclick="divDisplay(\'' + interfacId + '\',\'' + parameterId + '\');" src="../images/add.png">' + '</div>' + '</td>' + 
-							'<td>' + 
-							'<p onclick="updateParameter2(\''+ parameterId + '\',\''+ interfacId + '\');" style="color:#627CBE;" class="fa fa fa-edit"></p>'+
-							'&nbsp;&nbsp;&nbsp;&nbsp;<p onclick="deleteParameter(\''+ parameterId + '\');" style="color:#627CBE;" class="fa fa-trash-o"></p>' +
-							'</td>' + 
-						 '</tr>';
-			    
 				$("#tr-" + parameterId).remove();
-				$("#tbody-" + interfacId).append(tr);
+				$("#tbody-" + interfacId).append(data);
 				$("#up-parameter"+interfacId).children().remove();
-				 
-			}
 
 		})
 	}
