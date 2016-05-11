@@ -67,6 +67,24 @@ public class ParameterReturController {
 		map.put("p", pr);
 		return new ModelAndView("parameter_return/table_tr_return_parameter",map);
 	}
+	@RequestMapping("/updateParameterRetur")
+	
+	public ModelAndView updateParameterRetur(HttpServletRequest request, HttpSession session) {
+		
+		 
+		String parameterId = request.getParameter("parameterId");
+		 
+		
+		ParameterRetur pr = new ParameterRetur();
+		pr.setParameterId(parameterId);
+		 
+		
+		
+		pr = parameterReturService.parameterReturDao.get(pr);
+		Map<String,Object> map = new HashMap<>();
+		map.put("p", pr);
+		return new ModelAndView("parameter_return/up_parameter_return",map);
+	}
 	
 	/**
 	 * 删除 返回值 参数
