@@ -63,6 +63,10 @@ public class Interfac implements java.io.Serializable{
     /**参数格式*/
     private String parameterFormat; 
     
+    /**JSON格式的参数*/
+    private String jsonParameters;// JSON_PARAMETERS;
+    
+    
     
     /**模块*/
 	private Module module ;
@@ -290,13 +294,21 @@ public class Interfac implements java.io.Serializable{
     } 
     
     
+    
+    
     //----------------------------------------------------------------
     
     	 	 
  
 
 
-     //----------------------------------------------------------------
+     public String getJsonParameters() {
+		return jsonParameters;
+	}
+	public void setJsonParameters(String jsonParameters) {
+		this.jsonParameters = jsonParameters;
+	}
+	//----------------------------------------------------------------
      @Override
 	 public String toString() {
 		return  "Interfac : 接口_接口["+

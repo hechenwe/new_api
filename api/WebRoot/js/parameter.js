@@ -10,17 +10,17 @@ function toAddParameter() {
 		var parameterFormat = data.parameterFormat;
 		var parameterSize = data.parameterSize;
 
-		if (parameterFormat == "JSON") {
-			if (parameterSize == 0) {
-				 
-				$("#div_parameter"+interfacId).toggleClass('div-display');
-			} else {
-				alert("JSON格式的参数已添加!");
-			}
-		} else {
+//		if (parameterFormat == "JSON") {
+//			if (parameterSize == 0) {
+//				 
+//				$("#div_parameter"+interfacId).toggleClass('div-display');
+//			} else {
+//				alert("JSON格式的参数已添加!");
+//			}
+//		} else {
 			 
 			$("#div_parameter"+interfacId).toggleClass('div-display');
-		}
+		//}
 		$("#interfacId").val(interfacId);
 	})
 
@@ -89,6 +89,19 @@ function saveParameter() {
 				forms[i].reset();
 
 			}
+		 
+
+	})
+}
+
+function saveJsonParameter() {
+    var dataKeys = $("#context-menu").attr("data-key").split(":");
+	var interfacId = dataKeys[0];
+    var jsonParameters =$("#textarea-"+interfacId).val();
+
+	var urlString = "../interface/saveJsonParameters.html?interfacId=" + interfacId +"&jsonParameters="+jsonParameters;
+	 
+	$.get(urlString, function(data) {
 		 
 
 	})

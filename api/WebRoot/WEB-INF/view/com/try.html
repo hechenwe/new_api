@@ -13,15 +13,14 @@
 
 
 <form  target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="../spanRequestController/request.html" method="POST">
-	<#if interfac.parameters ?? > 
-	<#list interfac.parameters as parameter>
+	 
 	<h6>
-		 <textarea  style="width:98.11%" name="jsonString" id="text_${parameter.parameterId}" class="form-control-textarea" rows="5">${parameter.parameterExample}</textarea> 
+		 <textarea  style="width:98.11%" name="jsonString" id=" " class="form-control-textarea" rows="5">${interfac.jsonParameters!}</textarea> 
 	        <br>
-	        <p style="margin-left: 0px; margin-right: 16px;" align="right"><a onclick="formatJson('text_${parameter.parameterId}','try');"><small id="small_text_${parameter.parameterId}">格式化JSON</small></a></p> 
+	        <p style="margin-left: 0px; margin-right: 16px;" align="right"><a onclick=" "><small id=" ">格式化JSON</small></a></p> 
 	</h6>
-	<input type="hidden" name="requestType" value="POST"> </#list>
-	</#if>
+	<input type="hidden" name="requestType" value="POST"> 
+	 
 	<input type="hidden" id="url-${interfac.interfacId}" name="url" value="${interfac.url}"> 
 	 
 	<button style="margin-left: -30px;" class="btn btn-default" type="submit">
@@ -108,6 +107,17 @@
 	    	input.size= 10;
 	    }
 		 
+	}
+	
+
+	function changeUrl(interfacId,type){
+		 
+		if(type=="JSON"){
+			$("#url-"+interfacId).val($("#input"+interfacId).val());	
+		}else{
+			
+		$("#form"+interfacId).attr("action",$("#input"+interfacId).val());
+		}
 	}
 	
 	

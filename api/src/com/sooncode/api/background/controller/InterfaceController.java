@@ -243,5 +243,23 @@ public class InterfaceController {
 		map.put("interfac", i);
 		return new ModelAndView("interface/ed_interface_detail", map);
 	}
-
+	
+	
+	@RequestMapping("/saveJsonParameters")
+	public ModelAndView saveJsonParameters(HttpServletRequest request){
+		
+		String interfacId = request.getParameter("interfacId");
+		String jsonParameters = request.getParameter("jsonParameters");
+		
+		Interfac i = new Interfac();
+		i.setInterfacId(interfacId);
+		i = interfacService.interfacDao.get(i);
+		i.setJsonParameters(jsonParameters);
+		interfacService.interfacDao.update(i);	
+		
+		return null;
+		
+	}
+	
+	
 }
