@@ -12,8 +12,6 @@
 	<#else>
 		其他示例 :
 	</#if>
-		<!-- <p onclick="toUpdateExample('${example.exampleId}','${interfac.interfacId}');"  style = "color:#627CBE;" class="fa fa-edit "></p>
-	    <p onclick="deleteExample('${example.exampleId}');"  style = "color:#627CBE;" class="fa fa-trash-o"></p> -->
 	</h5>
 	<pre class="pre_js" data-key="${interfac.interfacId}:${example.exampleId}" data-toggle="context" data-target="#context-menu"><small id = "small-example-${example.exampleId}">${example.exampleContent} </small></pre>
 	
@@ -89,12 +87,17 @@
 		</#if>
 
 	</div>
-	<!-- <p>
-		<a onclick="openOrColseEaxmpleReturn('${example.exampleId}');"><img src="../images/add.png"></img>添加返回值参数</a>
-	</p> -->
-	<#include "../parameter_return/add_parameter_return.html"/>
+	 
+	<div id="${example.exampleId}" class="col-lg-12">
+	<#--  添加 更新 返回值参数DIV模块位置  -->
+	</div>
+	
+ 
+	
+	
+	
+	
 		<!------------------------ 返回值参数---------------------------- -->
-
 	<#include "../add/add_value_explain.html"/>
 	<!-- 添加返回参数 值说明-->
     </div>
@@ -103,17 +106,17 @@
 
 
 <ul id="return-ul-id" hidden="hidden">
-	<li><a onclick="toUpdateExample();">修改返回示例</a></li>
-	<li><a onclick="deleteExample();">删除返回示例</a></li>
-	<li><a onclick="openOrColseEaxmpleReturn();">添加返回值参数</a></li>
+	<li><a onclick="toUpdateExample();">修改</a></li>
+	<li><a onclick="deleteExample();">删除</a></li>
+	<li><a onclick="showAddParameterReturn();">添加返回值参数</a></li>
 </ul>
 
 
 <ul id="parameter-return-ul-id" hidden="hidden">
 	 
-	<li><a onclick=" ();">修改返回值参数</a></li>
-	<li><a onclick="deleteParameterReturn();">删除返回值参数</a></li>
-	<li><a onclick=" ();">添加返回值参数域</a></li>
+	<li><a onclick="toUpdateParameterReturn();">修改</a></li>
+	<li><a onclick="deleteParameterReturn();">删除</a></li>
+	<li><a onclick=" ();">添加域</a></li>
 </ul>
 
 

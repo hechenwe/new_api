@@ -176,9 +176,7 @@ legend {
 	border: 0
 }
 
-textarea {
-	overflow: auto
-}
+ 
 
 optgroup {
 	font-weight: 700
@@ -2675,7 +2673,7 @@ th {
 }
 
 .table-striped>tbody>tr:nth-of-type(odd) {
-	background-color: #f9f9f9
+	background-color: #ffffff
 }
 
 .table-hover>tbody>tr:hover {

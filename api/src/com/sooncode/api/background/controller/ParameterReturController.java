@@ -29,10 +29,13 @@ public class ParameterReturController {
 
 	@Autowired
 	private ParameterReturService parameterReturService;
-
+    /**
+     * 保存返回值参数
+     * @param request
+     * @return
+     */
 	@RequestMapping("/saveParameterRetur")
-	 
-	public ModelAndView saveParameterRetur(HttpServletRequest request, HttpSession session) {
+	public ModelAndView saveParameterRetur(HttpServletRequest request) {
 	 
 		String exampleId = request.getParameter("exampleId").trim().replace("-", "");
 		String parameterId = request.getParameter("parameterId").trim().replace("-", "");
@@ -62,39 +65,53 @@ public class ParameterReturController {
 		pr.setCreatDate(new Date());
 		 
 
-		long n = parameterReturService.parameterReturDao.save(pr);
+		parameterReturService.parameterReturDao.saveOrUpdate(pr);
 		Map<String,Object> map = new HashMap<>();
 		map.put("p", pr);
 		return new ModelAndView("parameter_return/table_tr_return_parameter",map);
 	}
-	@RequestMapping("/updateParameterRetur")
 	
-	public ModelAndView updateParameterRetur(HttpServletRequest request, HttpSession session) {
-		
-		 
+	/**
+	 * 加载修改DIV数据
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/updateParameterRetur")
+	public ModelAndView updateParameterRetur(HttpServletRequest request) {
 		String parameterId = request.getParameter("parameterId");
-		 
-		
 		ParameterRetur pr = new ParameterRetur();
 		pr.setParameterId(parameterId);
-		 
-		
 		
 		pr = parameterReturService.parameterReturDao.get(pr);
 		Map<String,Object> map = new HashMap<>();
-		map.put("p", pr);
-		return new ModelAndView("parameter_return/up_parameter_return",map);
+		map.put("pr", pr);
+		return new ModelAndView("parameter_return/add_up_parameter_return",map);
+	}
+	/**
+	 * 加载添加DIV数据
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/toAddParameterRueturn")
+	public ModelAndView toAddParameterRueturn(HttpServletRequest request) {
+		
+		String exampleId = request.getParameter("exampleId");
+		ParameterRetur pr = new ParameterRetur();
+		pr.setExampleId(exampleId);
+		 
+		Map<String,Object> map = new HashMap<>();
+		map.put("pr", pr);
+		return new ModelAndView("parameter_return/add_up_parameter_return",map);
 	}
 	
 	/**
 	 * 删除 返回值 参数
 	 * @param request
-	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/deleteParameterRetur")
 	@ResponseBody
-	public String deleteParameterRetur(HttpServletRequest request, HttpSession session) {
+	public String deleteParameterRetur(HttpServletRequest request) {
 		String parameterId = request.getParameter("parameterId");
 		ParameterRetur pr = new ParameterRetur();
 		pr.setParameterId(parameterId);

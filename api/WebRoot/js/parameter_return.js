@@ -1,19 +1,30 @@
-//-------------------------------------显示添加返回参数-------------------------------------------
-function openOrColseEaxmpleReturn(){
-	 
+//-------------------------------------显示添加返回参数DIV-------------------------------------------
+function showAddParameterReturn(){
 	 
 	 var dataKeys = $("#context-menu").attr("data-key").split(":");
-	 var interfacId = dataKeys[0]; 
 	 var exampleId = dataKeys[1]; 
-	$("#example-parameter"+exampleId).toggleClass('div-display');
-	 
+	 var url = "../parameterRetur/toAddParameterRueturn.html?exampleId="+exampleId;
+	 $.get(url, function(data) {
+		 $("#"+exampleId).append(data);
+	})	
 }
 
+function toUpdateParameterReturn(){
+	 var dataKeys = $("#context-menu").attr("data-key").split(":");
+	 var exampleId = dataKeys[0]; 
+	 var parameterId = dataKeys[1]; 
+	 var url = "../parameterRetur/updateParameterRetur.html?parameterId="+parameterId;
+	 $.get(url, function(data) {
+		 $("#"+exampleId).append(data);
+		})
+}
 
 //-----------------------------------------------------保存-返回参数----------------------------------------------
 function saveEaxmpleRetur(exampleId) {
-  
-	var parameterId = Math.uuid();
+	var parameterId = $("#"+exampleId+"parameterId").val();
+	if(parameterId==""){
+		parameterId = Math.uuid();
+	}
 	var parameterName = $("#"+ exampleId +"parameterName").val();
 	var parameterCode = $("#"+ exampleId +"parameterCode").val();
 	var parameterDataType = $("#"+ exampleId +"parameterDataType").val();
@@ -39,7 +50,7 @@ function saveEaxmpleRetur(exampleId) {
 	               "&weight="+weight;
 	
 	$.get(urlString, function(data) {
-		  
+	     $("#"+parameterId).remove();
 		 $("#parameter_return"+exampleId).append(data);
 		 parameterReturnMousedown();
 	})	
@@ -61,3 +72,5 @@ function deleteParameterReturn(){
 		})
 	}
 }
+
+

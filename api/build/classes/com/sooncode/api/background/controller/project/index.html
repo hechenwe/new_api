@@ -395,8 +395,12 @@
 									</#if>
                                  
                                     -->
-								  <pre  style="margin-left: 0px; margin-right: 10px;"><small id = "pre-${example.exampleId}">${example.exampleContent}</small></pre>
-							      <p style="margin-left: 0px; margin-right: 10px;" align="right"><a onclick="formatJson('pre-${example.exampleId}');"><small id="small_pre-${example.exampleId}">格式化JSON</small></a></p> 
+								  <pre  style="margin-right: 10px;"><small id = "pre-${example.exampleId}">${example.exampleContent}</small></pre>
+							      <p style="margin-right: 10px;" align="right">
+								      <a onclick="formatJson('pre-${example.exampleId}');">
+								      		<small id="small_pre-${example.exampleId}">格式化JSON</small>
+								      </a>
+							      </p> 
 							      <div style="margin-left: 0px; margin-right: 10px;" class="table-responsive">
 							
 									<#-- 返回值参数 -->

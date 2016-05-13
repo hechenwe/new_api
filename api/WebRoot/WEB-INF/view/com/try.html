@@ -15,9 +15,18 @@
 <form  target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="../spanRequestController/request.html" method="POST">
 	 
 	<h6>
-		 <textarea  style="width:98.11%" name="jsonString" id=" " class="form-control-textarea" rows="5">${interfac.jsonParameters!}</textarea> 
+	    <pre  style="margin-right: 10px;"><small id = "pre-try-${interfac.interfacId}">${interfac.jsonParameters!}</small></pre>
+	    <p style="margin-right: 10px;" align="right">
+		      <a onclick="formatJson('pre-try-${interfac.interfacId}');">
+		      		<small id="small-try-pre-${interfac.interfacId}">格式化JSON</small>
+		      </a>
+	    </p> 
+	
+	
+		<!--  <textarea  style="width:98.11%" name="jsonString" id="pre-${interfac.interfacId}" class="form-control-textarea" rows="5">${interfac.jsonParameters!}</textarea> 
 	        <br>
-	        <p style="margin-left: 0px; margin-right: 16px;" align="right"><a onclick=" "><small id=" ">格式化JSON</small></a></p> 
+	        <p style="margin-left: 0px; margin-right: 16px;" align="right">
+	        <a onclick="formatJson('pre-${interfac.interfacId}');"><small id="small_pre-${interfac.interfacId}">格式化JSON</small></a></p>  -->
 	</h6>
 	<input type="hidden" name="requestType" value="POST"> 
 	 
@@ -120,5 +129,19 @@
 		}
 	}
 	
+	function formatJson(exampleId,type){
+		var text = $("#small_"+exampleId).text();
+		if(text=="格式化JSON"){
+			  $("#small_"+exampleId).text("压缩JSON");
+			  var str = format($("#"+exampleId).text(),false);
+		}else{
+			  $("#small_"+exampleId).text("格式化JSON");
+			  var str = format($("#"+exampleId).text(),true);
+		}
+		$("#"+exampleId).text(str);
+		if(type=="try"){//试一试模块
+		autosize.update($("#"+exampleId)); /* 刷新 textareat 控件  */
+		}
+	}
 	
 </script>
