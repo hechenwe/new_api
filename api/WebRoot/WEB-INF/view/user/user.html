@@ -11,7 +11,7 @@
 <style type="text/css">
 </style>
 </head>
-<body>
+<body oncontextmenu=self.event.returnValue=false>
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-static-top main-top " role="navigation" style="margin-bottom: 0;">
 	<#include "../com/header.html"/></nav>
@@ -37,26 +37,25 @@
 												<th class=" "  style="width: 202px;">电子邮件</th>
 												<th class=" "  style="width: 185px;">角色</th>
 												<th class=" "  style="width: 12%;">注册日期</th>
-												<th class=" "  style="width: 25%;">操作</th>
+												<!-- <th class=" "  style="width: 25%;">操作</th> -->
 											</tr>
 										</thead>
 										<tbody>
 										<#if users ??>
 										<#list users as u>
 										   <#if u.userName != user.userName >
-										   <tr class="gradeA odd" role="row">
+										   <tr  class="gradeA odd tr_js" role="row"  data-key="${u.userId}:${u.userName}" data-toggle="context" data-target="#context-menu" >
 												<td class="">${u_index + 1}</td>
 												<td class="">${u.userName}</td>
 												<td class="">${u.email}</td>
 												<td class="">${u.role.roleName}</td>
 												<td class="center">${u.registerDate?string("yyyy-MM-dd")}</td>
-												<td class="center sorting_1">
-												 <a class="btn btn-primary btn-xs">修改</a>&nbsp;&nbsp;
-												 <a class="btn btn-success btn-xs">查看</a>&nbsp;&nbsp;
-												 <a class="btn btn-info btn-xs" href="../userController/toRole.html?userId=${u.userId}&userName=${u.userName}">权限</a>&nbsp;&nbsp;
-												 <a class="btn btn-default btn-xs" onclick="deleteUser('${u.userId}')">删除</a>
-												 
-												 </td>
+												<!-- <td class="center sorting_1"> -->
+												<!--  <a class="btn btn-primary btn-xs">修改</a>&nbsp;&nbsp;
+												 <a class="btn btn-success btn-xs">查看</a>&nbsp;&nbsp; -->
+												<!--  <a class="btn btn-info btn-xs" href="../userController/toRole.html?userId=${u.userId}&userName=${u.userName}">权限</a>&nbsp;&nbsp;
+												 <a class="btn btn-default btn-xs" onclick="deleteUser('${u.userId}')">删除</a> -->
+												<!--  </td> -->
 											</tr>
 										   </#if>
 										</#list>
@@ -67,23 +66,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<!-- <div class="col-sm-6">
-									<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-								</div> -->
-								<!-- <div class="col-sm-6">
-									<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
-										<ul class="pagination">
-											<li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous"><a href="#">上一页</a></li>
-											<li class="paginate_button active" aria-controls="dataTables-example" tabindex="0"><a href="#">1</a></li>
-											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">2</a></li>
-											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">3</a></li>
-											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">4</a></li>
-											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">5</a></li>
-											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">6</a></li>
-											<li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a href="#">下一页</a></li>
-										</ul>
-									</div>
-								</div> -->
+								 
 							</div>
 							
 							<div>
@@ -105,9 +88,46 @@
 		</div>
 
 	</div>
+	
+	<#-- 右键菜单 -->
+<div  id="context-menu" data-key="">
+  <ul style="width:200px;" id = "context-menu-ul" class="dropdown-menu" role="menu">
+  
+  </ul>
+</div>
+
+<#-- 右键菜单  菜单选项-->
+<ul id = "user-lis" class="dropdown-menu" role="menu">
+    <li><a onclick="display();" >添加用户</a></li>
+    <li><a onclick="toRole();" >修改权限</a></li>
+    <li><a onclick="deleteUser();"  >删除用户 </a></li>
+   
+</ul>
+  
+  
 	<#include "../com/js.html"/>
 	<script type="text/javascript">
 	
+	function userMousedown() {
+		 
+		$('.tr_js').mousedown(function(e) {
+			 
+			if (3 == e.which) { //这 是右键单击事件
+			 
+				var lis = $("#user-lis").html();
+				var ul = $("#context-menu-ul");
+				ul.empty();
+				ul.append(lis);
+		
+				var key = $(this).attr("data-key");
+				$("#context-menu").attr("data-key", key);
+		
+			}
+		});
+	}
+
+	userMousedown();
+	  
 	    //显示 和 隐藏 添加项目的div
 		function display(){
 			$("#div-add-project").toggleClass('div-display');
@@ -166,14 +186,22 @@
 		    })
 		}
 		
-		function deleteUser (userId){
-			
+		function deleteUser (){
+			var dataKeys = $("#context-menu").attr("data-key").split(":");
+			var userId = dataKeys[0]; 
 			if (confirm("确认要删除？")) {
 			var url = '../companyController/deleteUser.html?userId='+ userId ;
 			$.get(url,function (data){
 				window.location.reload();
 			})
 			}
+		}
+		
+		function toRole(){
+			var dataKeys = $("#context-menu").attr("data-key").split(":");
+			var userId = dataKeys[0]; 
+			var userName = dataKeys[1]; 
+			window.location.href="../userController/toRole.html?userId="+userId+"&userName="+userName;
 		}
 	</script>
 </body>

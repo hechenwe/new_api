@@ -196,7 +196,7 @@
 		function releaseProjectApi(projectId) {
 			var url = '../project/releaseProjectApi.html?projectId=' + projectId;
 
-			var img = '<img src="../images/gif/1.gif">';
+			var img = '<img src="../images/1.gif">';
 			$("#a-" + projectId).text("").append(img);
 			$.get(url, function(data) {
 				if (data == "1") {
