@@ -71,8 +71,10 @@ public class Interfac implements java.io.Serializable{
     /**模块*/
 	private Module module ;
 	
-	
-  
+	/**
+	 * 响应示例
+	 */
+    private String example;
  
  
  
@@ -81,7 +83,7 @@ public class Interfac implements java.io.Serializable{
 	
 		 
     /** 返回值_事例 */
-	private  List<Example> examples ;
+	 private  List<Example> examples ; 
 	
 		 
  
@@ -284,14 +286,14 @@ public class Interfac implements java.io.Serializable{
     	 	 
 	 
 	
-	/**返回值_事例*/ 
+	/**返回值_事例*/  
     public List<Example> getExamples(){  
       return this.examples;  
     }  
-    /**返回值_事例*/
+    /**返回值_事例*/ 
     public void setExamples(List<Example> examples){  
       this.examples = examples;  
-    } 
+    }  
     
     
     
@@ -304,6 +306,12 @@ public class Interfac implements java.io.Serializable{
 
      public String getJsonParameters() {
 		return jsonParameters;
+	}
+	public String getExample() {
+		return example;
+	}
+	public void setExample(String example) {
+		this.example = example;
 	}
 	public void setJsonParameters(String jsonParameters) {
 		this.jsonParameters = jsonParameters;

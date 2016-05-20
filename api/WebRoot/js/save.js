@@ -21,28 +21,6 @@
 		
 		
 		
-		//-----------------------------------------------------保存-返回示例----------------------------------------------
-		  function saveExample(interfacId) {
-			 
-			  
-			var exampleId = Math.uuid();
-			var exampleType = $("#"+ interfacId +"exampleType").val();
-			var exampleContent = $("#"+ interfacId +"exampleContent").val();
-		    
-			var urlString ="../example/savaExample.html"+
-			               "?interfacId="+interfacId+
-			               "&exampleId="+exampleId+
-			               "&exampleType="+exampleType+
-			               "&exampleContent="+exampleContent;
-			//alert(urlString);
-			$.get(urlString, function(data) {
-				 
-				$("#div-example"+interfacId).append(data);
-				$("#"+ interfacId +"exampleContent").val("");
-				 
-				$("#returnExample"+interfacId).addClass("div-display");
-			})	
-		}  
 		
 		//-----------------------------------------------------保存-返回参数说明----------------------------------------------
 		  function saveValueExplain(exampleId) {
