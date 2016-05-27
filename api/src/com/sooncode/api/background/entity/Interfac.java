@@ -71,11 +71,7 @@ public class Interfac implements java.io.Serializable{
     /**模块*/
 	private Module module ;
 	
-	/**
-	 * 响应示例
-	 */
-    private String example;
- 
+	 
  
  
     /** 参数_参数 */
@@ -307,32 +303,15 @@ public class Interfac implements java.io.Serializable{
      public String getJsonParameters() {
 		return jsonParameters;
 	}
-	public String getExample() {
-		return example;
-	}
-	public void setExample(String example) {
-		this.example = example;
-	}
+	 
 	public void setJsonParameters(String jsonParameters) {
 		this.jsonParameters = jsonParameters;
 	}
 	//----------------------------------------------------------------
-     @Override
-	 public String toString() {
-		return  "Interfac : 接口_接口["+
-		        " ;接口编号:interfacId = " + interfacId +  
-		        " ;模块编号:moduleId = " + moduleId +  
-		        " ;接口名称:interfacName = " + interfacName +  
-		        " ;接口代码:interfacCode = " + interfacCode +  
-		        " ;接口简介:interfacIntro = " + interfacIntro +  
-		        " ;接口链接:url = " + url +  
-		        " ;返回数据类型:returnDataType = " + returnDataType +  
-		        " ;请求方式:requestType = " + requestType +  
-		        " ;风格:style = " + style +  
-		        " ;创建时间:creatDate = " + creatDate +  
-		        " ;权重:weight = " + weight +  
-		        " ;参数格式:parameterFormat = " + parameterFormat + "]" ;
+	@Override
+	public String toString() {
+		return "{\"interfacId\":\"" + interfacId + "\",\"moduleId\":\"" + moduleId + "\",\"interfacName\":\"" + interfacName + "\",\"interfacCode\":\"" + interfacCode + "\",\"interfacIntro\":\"" + interfacIntro + "\",\"url\":\"" + url + "\",\"returnDataType\":\"" + returnDataType + "\",\"requestType\":\"" + requestType + "\",\"style\":\"" + style + "\",\"creatDate\":\"" + creatDate + "\",\"weight\":\"" + weight + "\",\"parameterFormat\":\"" + parameterFormat + "\",\"jsonParameters\":\"" + jsonParameters + "\",\"module\":\"" + module + "\",\"parameters\":\"" + parameters + "\",\"examples\":\"" + examples + "\"}  ";
 	}
- 
+     
 
 }

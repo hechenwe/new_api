@@ -87,9 +87,11 @@ public class  HttpRequestOtherSystem {
 				return result;
 			 
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
-		return "{\"message\":\"服务器错误\"}"; // 自定义错误信息
+		
+		
+		return "{\"message\":\""+url+" 资源路径有错误\"}"; // 自定义错误信息
 		
 	}
 	  

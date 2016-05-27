@@ -1,7 +1,7 @@
 
 
 <p>
-	<small>接口URL : <input id="input${interfac.interfacId}" autocomplete="off" onchange="changeUrl('${interfac.interfacId}','${interfac.parameterFormat}');" class="input-non" style="border-bottom:1px solid #337AB7;outline:none ;width:90%" value="${interfac.url}"></small>
+	<small>接口URL : <input id="input${interfac.interfacId}" autocomplete="off" onchange="changeUrl('${interfac.interfacId}','${interfac.parameterFormat}');" class="input-non" style="border-bottom:1px solid #CCC;outline:none ;width:90%" value="${interfac.url}"></small>
 </p>
  
 <p>
@@ -23,7 +23,7 @@
 	    </p>  -->
 	
 	
-		 <textarea  style="width:98.11%" name="jsonString" id="pre-${interfac.interfacId}" class="form-control-textarea" rows="5">${interfac.jsonParameters!}</textarea> 
+		 <textarea  style="width:99.11%" name="jsonString" id="pre-${interfac.interfacId}" class="form-control-textarea textarea" rows="5">${interfac.jsonParameters!}</textarea> 
 	        <br>
 	        <p style="margin-left: 0px; margin-right: 16px;" align="right">
 	        <a onclick="formatJson('pre-${interfac.interfacId}');"><small id="small_pre-${interfac.interfacId}">格式化JSON</small></a></p> 
@@ -82,7 +82,7 @@
 		      </#list>
               </select>
 		  <#else>
-		      <input type="text" autocomplete="off" class="input-non" style="border-bottom:1px solid #337AB7;outline:none ;width:50%" name="${parameter.parameterCode}" value="${parameter.parameterExample}">
+		      <input type="text" autocomplete="off" class="input-non" style="border-bottom:1px solid #CCC;outline:none ;width:50%" name="${parameter.parameterCode}" value="${parameter.parameterExample}">
 		 </#if>
 		</#if>
 	</h6>

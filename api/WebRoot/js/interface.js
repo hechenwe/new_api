@@ -5,6 +5,7 @@ function toAddInterface() {
 	 var moduleId = dataKeys[0];  
 	 var urlString = "../interface/toAddInterface.html?moduleId="+moduleId;
 	 $.get(urlString,function (data){
+		 $("#div_interfac"+moduleId).empty();
 		 $("#div_interfac"+moduleId).append(data);
 		 $("#div_interfac"+moduleId).removeClass('div-display');
 		})
@@ -18,7 +19,7 @@ function editInterface() {
 	$.get(urlString, function(data) {
 		 
 		 var moduleId =  $(data).find("#moduleId").val();
-		 
+		 $("#div_interfac"+moduleId).empty();
 		 $("#div_interfac"+moduleId).append(data);
 		 $("#div_interfac"+moduleId).removeClass('div-display');
 	})
@@ -40,8 +41,8 @@ function cancelSaveInterface(){
 function saveInterfac() {
 	 
 	var moduleId = $("#moduleId").val();
-	var interfacId = $("#interfacId").val()
-	console.log(interfacId);
+	var interfacId = $("#add_up_interfacId").val()
+	 
 	var type = "ADD"
 	if(interfacId==""){
 		interfacId = Math.uuid();
