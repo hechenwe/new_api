@@ -123,7 +123,7 @@ public class CompayController {
 		
 		Long n = userService.userDao.save(user);
 		
-		if(n==1){
+		if(n != null && n==1){
 			return "1";
 		}else{
 			return "0";

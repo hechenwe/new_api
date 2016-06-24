@@ -25,6 +25,7 @@ import com.sooncode.api.background.service.CompanyService;
 
 import com.sooncode.api.background.service.UserService;
 import com.sooncode.api.background.util.Md5;
+import com.sooncode.jdbc.SimpleDao;
 
 @Controller
 @RequestMapping("/indexController")
@@ -45,6 +46,7 @@ public class IndexController {
 	 * @param session
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(HttpServletRequest request, HttpSession session) {
 		String userName = request.getParameter("userName");
@@ -68,12 +70,15 @@ public class IndexController {
 
 			company = companyService.companyDao.get(company);
 
-			List<User> users = userService.userDao.getPager(1L, 1L, user, new Role(), new Company()).getLists();// (user,
-																												// null,
-																												// null,
-																												// 1,
-																												// 1).getLists();
+			List<User> users = userService.userDao.getPager(1L, 1L, user, new Role(), new Company()).getLists(); 
+				
+			 																				 
 			if (users != null && users.size() == 1) {
+				Control c = new Control();
+				c.setUserId(users.get(0).getUserId());
+			    List< Control> controls  = (List<Control>) SimpleDao.gets(c);	
+			    session.removeAttribute("controls");
+			    session.setAttribute("controls", controls);
 				session.removeAttribute("user");
 				session.setAttribute("user", users.get(0));
 			}
@@ -227,4 +232,16 @@ public class IndexController {
 		return new ModelAndView("login/login", map);
 	}
 
+	@RequestMapping("/error404")
+	public ModelAndView error404(HttpServletRequest request,HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", "error404");
+		return new ModelAndView("error/404", map);
+	}
+	@RequestMapping("/error500")
+	public ModelAndView error500(HttpServletRequest request,HttpSession session){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("page", "error500");
+		return new ModelAndView("error/500", map);
+	}
 }

@@ -55,6 +55,8 @@ public class Project implements java.io.Serializable{
     /**版本号*/
     private String versions; 
     
+    /**是否发布*/
+    private String isIssue;//IS_ISSUE;
     
     /**公司编号*/
 	private Company company ;
@@ -249,9 +251,19 @@ public class Project implements java.io.Serializable{
 		this.urlPrefix = urlPrefix;
 	}
 	//----------------------------------------------------------------
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "{\"projectId\":\"" + projectId + "\",\"projectName\":\"" + projectName + "\",\"projectCode\":\"" + projectCode + "\",\"urlPrefix\":\"" + urlPrefix + "\",\"projectIntro\":\"" + projectIntro + "\",\"creatDate\":\"" + creatDate + "\",\"weight\":\"" + weight + "\",\"companyId\":\"" + companyId + "\",\"authorName\":\"" + authorName + "\",\"versions\":\"" + versions + "\",\"company\":\"" + company + "\",\"modules\":\"" + modules + "\",\"users\":\"" + users + "\"}  ";
+	}
+	public String getIsIssue() {
+		return isIssue;
+	}
+	public void setIsIssue(String isIssue) {
+		this.isIssue = isIssue;
 	}
     
  

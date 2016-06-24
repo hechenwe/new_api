@@ -9,6 +9,7 @@ import com.sooncode.jdbc.sql.SQL;
 
 public class ModuleDao extends Dao<Module> implements ModuleDaoI {
 
+	 
 	@Override
 	public Integer getMaxWeight(String projectId) {
 		String sql = "SELECT MAX(WEIGHT) AS WEIGHT  FROM MODULE  WHERE PROJECT_ID = '"+projectId+"'";

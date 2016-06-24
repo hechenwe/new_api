@@ -7,6 +7,7 @@ import com.sooncode.jdbc.Dao;
 import com.sooncode.jdbc.sql.SQL;
 public class ParameterDao extends Dao<Parameter> implements ParameterDaoI {
 
+	 
 	@Override
 	public Integer getMaxWeight(String interfacId) {
 		String sql = "SELECT MAX(WEIGHT) AS WEIGHT  FROM PARAMETER  WHERE INTERFAC_ID = '"+interfacId+"'";

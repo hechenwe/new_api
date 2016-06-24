@@ -11,6 +11,8 @@ import com.sooncode.jdbc.sql.SQL;
 
 public class InterfacDao extends Dao<Interfac> implements InterfacDaoI {
 
+	 
+	
 	@Override
 	public Integer getMaxWeight(String moduleId) {
 		String sql = "SELECT MAX(WEIGHT) AS WEIGHT  FROM INTERFAC  WHERE MODULE_ID = '"+moduleId+"'";

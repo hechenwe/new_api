@@ -59,17 +59,40 @@
 													<td class=""><a href="../project/${p.projectCode}.shtml">${p.projectCode}</a></td>
 													<!-- <td class="">12</td> -->
 													<td class="center">${p.creatDate?string("yyyy-MM-dd")}</td>
+												<#if p.isIssue == "TRUE">
 													<td class="center">已发布</td>
+												<#else>
+													<td class="center">未发布</td>
+												</#if>
 													<td class="center sorting_1">
+														
 														<a class="btn btn-success btn-xs" href="../project/${p.projectCode}.shtml">查看</a>
 														&nbsp;&nbsp;&nbsp;&nbsp; 
-														<#if user.role.roleCode == "ADMIN"> 
+														<#if  user.role.roleCode=="ADMIN">
 														<a class="btn btn-primary btn-xs" href="../project/edProject.html?projectId=${p.projectId}">编辑 </a>
-														&nbsp;&nbsp;&nbsp;&nbsp; 
-														<a id="a-${p.projectId}" class="btn btn-info btn-xs spinner-loader" onclick="releaseProjectApi('${p.projectId}')">发布</a>
-														&nbsp;&nbsp;&nbsp;&nbsp; 
-														<a class="btn btn-default btn-xs" onclick="deleteProject('${p.projectId}')">删除 </a> 
-														</#if>
+															&nbsp;&nbsp;&nbsp;&nbsp; 
+															<a id="a-${p.projectId}" class="btn btn-info btn-xs spinner-loader" onclick="releaseProjectApi('${p.projectId}')">发布</a>
+															&nbsp;&nbsp;&nbsp;&nbsp; 
+															<a class="btn btn-default btn-xs" onclick="deleteProject('${p.projectId}')">删除 </a> 
+														<#else>
+							                               <#list controls as c >
+														
+																<#if c.projectId == p.projectId && c.operationId == "643D6526E23F4FF8A241499531144195"> 
+																 
+																<a class="btn btn-primary btn-xs" href="../project/edProject.html?projectId=${p.projectId}">编辑 </a>
+																&nbsp;&nbsp;&nbsp;&nbsp; 
+																<a id="a-${p.projectId}" class="btn btn-info btn-xs spinner-loader" onclick="releaseProjectApi('${p.projectId}')">发布</a>
+																&nbsp;&nbsp;&nbsp;&nbsp; 
+																<a class="btn btn-default btn-xs" onclick="deleteProject('${p.projectId}')">删除 </a> 
+																</#if>
+														
+														    </#list>							
+														
+														  </#if>
+														
+														
+														
+														
 													</td>
 
 												</tr>

@@ -15,10 +15,12 @@ import com.sooncode.api.background.entity.Project;
 import com.sooncode.api.background.entity.ValueExplain;
 
 import com.sooncode.jdbc.Dao;
-import com.sooncode.jdbc.CacheDao;
+import com.sooncode.jdbc.SimpleDao;
+ 
 
 public class ProjectDao extends Dao<Project>implements ProjectDaoI {
  
+	 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Project getProjectAllInfo(String projectId) {
@@ -27,27 +29,27 @@ public class ProjectDao extends Dao<Project>implements ProjectDaoI {
 		m.setProjectId(projectId);
 		p.setProjectId(projectId);
 		p = this.get(p);
-		List<Module> modules = (List<Module>) CacheDao.getPager(1L, Long.MAX_VALUE, m).getLists(); 
+		List<Module> modules = (List<Module>) SimpleDao.getPager(1L, Long.MAX_VALUE, m).getLists(); 
 		for (Module module : modules) {
 			Interfac interfac = new Interfac();
 			interfac.setModuleId(module.getModuleId());
-			List<Interfac> interfaces = (List<Interfac>) CacheDao.getPager(1L, Long.MAX_VALUE, interfac).getLists();// 接口
+			List<Interfac> interfaces = (List<Interfac>) SimpleDao.getPager(1L, Long.MAX_VALUE, interfac).getLists();// 接口
 			module.setInterfacs(interfaces);
 			for (Interfac i : interfaces) {
 
 				Parameter para = new Parameter();
 				para.setInterfacId(i.getInterfacId());
-				List<Parameter> parameters = (List<Parameter>) CacheDao.getPager(1L, Long.MAX_VALUE, para).getLists();// 参数
+				List<Parameter> parameters = (List<Parameter>) SimpleDao.getPager(1L, Long.MAX_VALUE, para).getLists();// 参数
 				i.setParameters(parameters);
 				Example example = new Example();
 				example.setInterfacId(i.getInterfacId());
-				List<Example> examples = (List<Example>) CacheDao.getPager(1L, Long.MAX_VALUE, example).getLists();// 返回值事例
+				List<Example> examples = (List<Example>) SimpleDao.getPager(1L, Long.MAX_VALUE, example).getLists();// 返回值事例
 				i.setExamples(examples);
 
 				for (Parameter parameter : parameters) { // 遍历参数
 					ParameterConstraint pc = new ParameterConstraint();
 					pc.setParameterId(parameter.getParameterId());
-					List<ParameterConstraint> pces = (List<ParameterConstraint>) CacheDao.getPager(1L, Long.MAX_VALUE, pc).getLists();// 返回值参数约束
+					List<ParameterConstraint> pces = (List<ParameterConstraint>) SimpleDao.getPager(1L, Long.MAX_VALUE, pc).getLists();// 返回值参数约束
 					parameter.setParameterConstraints(pces);
 
 				}
@@ -55,13 +57,13 @@ public class ProjectDao extends Dao<Project>implements ProjectDaoI {
 				for (Example e : examples) {
 					ParameterRetur pr = new ParameterRetur();
 					pr.setExampleId(e.getExampleId());
-					List<ParameterRetur> pres = (List<ParameterRetur>) CacheDao.getPager(1L, Long.MAX_VALUE, pr).getLists();
+					List<ParameterRetur> pres = (List<ParameterRetur>) SimpleDao.getPager(1L, Long.MAX_VALUE, pr).getLists();
 					e.setParameterReturs(pres);
 
 					for (ParameterRetur parameterR : pres) {
 						ValueExplain ve = new ValueExplain();
 						ve.setParameterId(parameterR.getParameterId());
-						List<ValueExplain> ves = (List<ValueExplain>) CacheDao.getPager(1L, Long.MAX_VALUE, ve).getLists();
+						List<ValueExplain> ves = (List<ValueExplain>) SimpleDao.getPager(1L, Long.MAX_VALUE, ve).getLists();
 						parameterR.setValueExplains(ves);
 					}
 
@@ -84,7 +86,7 @@ public class ProjectDao extends Dao<Project>implements ProjectDaoI {
 		p.setProjectId(projectId);
 		p = this.get(p);
 		@SuppressWarnings("unchecked")
-		List<Module> modules = (List<Module>) CacheDao.getPager(1L, Long.MAX_VALUE, m).getLists(); 
+		List<Module> modules = (List<Module>) SimpleDao.getPager(1L, Long.MAX_VALUE, m).getLists(); 
 		p.setModules(modules);
 		return p;
 		
@@ -102,22 +104,22 @@ public class ProjectDao extends Dao<Project>implements ProjectDaoI {
 		 
 		       Interfac i = new Interfac();
 	           i.setInterfacId(interfacId);
-		       i = (Interfac) CacheDao.get(i);
+		       i = (Interfac) SimpleDao.get(i);
 				
 				
 				Parameter para = new Parameter();
 				para.setInterfacId(i.getInterfacId());
-				List<Parameter> parameters = (List<Parameter>) CacheDao.getPager(  1L, Long.MAX_VALUE,para).getLists();//参数
+				List<Parameter> parameters = (List<Parameter>) SimpleDao.getPager(  1L, Long.MAX_VALUE,para).getLists();//参数
 				i.setParameters(parameters);
 				Example example = new Example();
 				example.setInterfacId(i.getInterfacId());
-				List<Example>  examples = (List<Example>) CacheDao.getPager(  1L, Long.MAX_VALUE,example).getLists();//返回值事例
+				List<Example>  examples = (List<Example>) SimpleDao.getPager(  1L, Long.MAX_VALUE,example).getLists();//返回值事例
 				i.setExamples(examples);
 				
 				for (Parameter parameter : parameters) { // 遍历参数
 					ParameterConstraint pc = new ParameterConstraint();
 					pc.setParameterId(parameter.getParameterId());
-					List<ParameterConstraint> pces = (List<ParameterConstraint>) CacheDao.getPager(1L, Long.MAX_VALUE, pc).getLists();// 返回值参数约束
+					List<ParameterConstraint> pces = (List<ParameterConstraint>) SimpleDao.getPager(1L, Long.MAX_VALUE, pc).getLists();// 返回值参数约束
 					parameter.setParameterConstraints(pces);
 
 				}
@@ -125,13 +127,13 @@ public class ProjectDao extends Dao<Project>implements ProjectDaoI {
 				for (Example e : examples) {
 					ParameterRetur pr = new ParameterRetur();
 					pr.setExampleId(e.getExampleId());
-					List<ParameterRetur> pres = (List<ParameterRetur>) CacheDao.getPager(1L, Long.MAX_VALUE, pr).getLists();
+					List<ParameterRetur> pres = (List<ParameterRetur>) SimpleDao.getPager(1L, Long.MAX_VALUE, pr).getLists();
 					e.setParameterReturs(pres);
 
 					for (ParameterRetur parameterR : pres) {
 						ValueExplain ve = new ValueExplain();
 						ve.setParameterId(parameterR.getParameterId());
-						List<ValueExplain> ves = (List<ValueExplain>) CacheDao.getPager(1L, Long.MAX_VALUE, ve).getLists();
+						List<ValueExplain> ves = (List<ValueExplain>) SimpleDao.getPager(1L, Long.MAX_VALUE, ve).getLists();
 						parameterR.setValueExplains(ves);
 					}
 

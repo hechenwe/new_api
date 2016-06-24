@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ import com.sooncode.api.background.util.MyUUID;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-	
+	public final static Logger logger = Logger.getLogger("ProjectController.class");
 
 	@Autowired
 	private ProjectService projectService;
@@ -67,11 +68,17 @@ public class ProjectController {
 		return new ModelAndView("project/" + projectCode, null);
 	}
 
+	/**
+	 * 发布API文档生成HTML文件
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/releaseProjectApi")
 	@ResponseBody
 	public String releaseProjectApi(HttpServletRequest request) {
+		
+		Long t1 = System.currentTimeMillis();
 		String projectId = request.getParameter("projectId");
-
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		Project p = new Project();
@@ -84,11 +91,16 @@ public class ProjectController {
 
 		try {
 			FreemarkerOut.fileOutput(map, project.getProjectCode());
+			project.setIsIssue("TRUE");
 		} catch (Exception e) {
-
+			project.setIsIssue("FALSE");
 			e.printStackTrace();
 		}
-
+		Long t2 = System.currentTimeMillis();
+		logger.debug("[发布API文档]：耗时 "+(t2-t1)); 
+		
+		projectService.projectDao.update(project);
+		
 		return "1";
 	}
 
@@ -114,6 +126,7 @@ public class ProjectController {
 		p.setVersions("1.0");
 		p.setCreatDate(new Date());
 		p.setWeight(1);
+		p.setIsIssue("FALSE");
 	    projectService.projectDao.save(p); 
 		return "1";
 	}
