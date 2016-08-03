@@ -2,14 +2,41 @@
 function toAddInterface() {
 	 
 	 var dataKeys = $("#context-menu").attr("data-key").split(":");
-	 var moduleId = dataKeys[0];  
-	 var urlString = "../interface/toAddInterface.html?moduleId="+moduleId;
-	 $.get(urlString,function (data){
-		 $("#div_interfac"+moduleId).empty();
-		 $("#div_interfac"+moduleId).append(data);
-		 $("#div_interfac"+moduleId).removeClass('div-display');
-		})
+	 var moduleId = dataKeys[0];
+	 var bool = $("#module"+moduleId).hasClass('div-display');
+	 
+	 if(bool){ //没有展开模块，时展开模块。
+		 var imgId = "img_module_"+moduleId;
+		 var string = $("#module"+moduleId).html().trim();
+			if(string==""){
+				$.get("../interface/getInterfaces.html?moduleId="+moduleId,function (data){
+					$("#module"+moduleId).append(data);
+					$("#"+imgId).attr("src","../images/down.png");
+					$("#module"+moduleId).removeClass('div-display');
+					
+					var urlString = "../interface/toAddInterface.html?moduleId="+moduleId; //加载添加接口的div
+					 $.get(urlString,function (data){
+						 
+						 $("#div_interfac"+moduleId).empty();
+						 $("#div_interfac"+moduleId).append(data);
+						 $("#div_interfac"+moduleId).removeClass('div-display');
+					 })
+				})
+			}
+		 
+	 }else{
+		 var urlString = "../interface/toAddInterface.html?moduleId="+moduleId;
+		 $.get(urlString,function (data){
+			 
+			 $("#div_interfac"+moduleId).empty();
+			 $("#div_interfac"+moduleId).append(data);
+			 $("#div_interfac"+moduleId).removeClass('div-display');
+		 })
+		 
+	 }
+	                          
 }
+
 
 //----------------------------更新接口信息-----------------------------------------------------
 function editInterface() {

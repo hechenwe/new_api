@@ -8,6 +8,11 @@ function toAddModule(projectId) {
 
 }
 
+function cancelSaveModule(moduleId){
+	//div-${module.moduleId}
+	$("#div-"+moduleId).addClass('div-display');
+}
+
 //保存模块
 function saveModule() {
 	 

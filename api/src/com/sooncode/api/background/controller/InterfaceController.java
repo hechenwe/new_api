@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sooncode.api.background.entity.Example;
 import com.sooncode.api.background.entity.Interfac;
 import com.sooncode.api.background.entity.Parameter;
 import com.sooncode.api.background.entity.Project;
+import com.sooncode.api.background.service.ExampleService;
 import com.sooncode.api.background.service.InterfacService;
 import com.sooncode.api.background.service.ParameterService;
 import com.sooncode.api.background.service.ProjectService;
+import com.sooncode.api.background.util.MyUUID;
 
 @Controller
 @RequestMapping("/interface")
@@ -31,6 +34,8 @@ public class InterfaceController {
 
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private ExampleService exampleService;
 
 	@RequestMapping("/saveInterface")
 
@@ -51,7 +56,6 @@ public class InterfaceController {
 		String parameterFormat = request.getParameter("parameterFormat");
 		String type = request.getParameter("type");
 		String style = request.getParameter("style");
-		
 
 		Interfac i = new Interfac();
 
@@ -82,6 +86,11 @@ public class InterfaceController {
 
 			interfacService.interfacDao.save(i);
 			map.put("interfac", i);
+			// 创建 返回值示例
+			Example ex = new Example();
+			ex.setExampleId(MyUUID.getUUID());
+			ex.setInterfacId(interfacId);
+			exampleService.exampleDao.save(ex);
 
 		}
 
@@ -127,8 +136,6 @@ public class InterfaceController {
 		newMap.put("parameterSize", parameterSize);
 		return newMap;
 	}
-
-	 
 
 	/**
 	 * 删除接口信息
@@ -243,23 +250,21 @@ public class InterfaceController {
 		map.put("interfac", i);
 		return new ModelAndView("interface/ed_interface_detail", map);
 	}
-	
-	
+
 	@RequestMapping("/saveJsonParameters")
-	public ModelAndView saveJsonParameters(HttpServletRequest request){
-		
+	public ModelAndView saveJsonParameters(HttpServletRequest request) {
+
 		String interfacId = request.getParameter("interfacId");
 		String jsonParameters = request.getParameter("jsonParameters");
-		
+
 		Interfac i = new Interfac();
 		i.setInterfacId(interfacId);
 		i = interfacService.interfacDao.get(i);
 		i.setJsonParameters(jsonParameters);
-		interfacService.interfacDao.update(i);	
-		
+		interfacService.interfacDao.update(i);
+
 		return null;
-		
+
 	}
-	
-	
+
 }

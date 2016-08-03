@@ -5,7 +5,7 @@ function showAddParameterReturn(){
 	 var exampleId = dataKeys[1]; 
 	 var url = "../parameterRetur/toAddParameterRueturn.html?exampleId="+exampleId;
 	 $.get(url, function(data) {
-		 $("#"+exampleId).append(data);
+		 $("#"+exampleId+"-div").append(data);
 	})	
 }
 

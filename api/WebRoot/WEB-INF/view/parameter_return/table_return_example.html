@@ -2,7 +2,7 @@
 	<#if interfac.examples ??> 
 	<#list interfac.examples as example> 
 	 
-	 <textarea id = "small-example-${example.exampleId}"  data-key="${interfac.interfacId}:${example.exampleId}" data-toggle="context" data-target="#context-menu"  class="form-control-textarea pre_js" rows="5">${example.exampleContent!}</textarea> 
+	 <textarea style="width:99.4%" id = "${example.exampleId}"  data-key="${interfac.interfacId}:${example.exampleId}" data-toggle="context" data-target="#context-menu"  class="form-control-textarea pre_js textarea" rows="5">${example.exampleContent!}</textarea> 
 	 <br>
      
 	<!--  添加返回值参数 -->
@@ -75,7 +75,7 @@
 
 	</div>
 	 
-	<div id="${example.exampleId}" class="col-lg-12">
+	<div id="${example.exampleId}-div" class="col-lg-12">
 	<#--  添加 更新 返回值参数DIV模块位置  -->
 	</div>
 	
@@ -83,14 +83,16 @@
 	<#include "../value_explain/add_value_explain.html"/>
 	<!-- 添加返回参数 值说明-->
     </div>
-	</#list> </#if>
+	</#list> 
+	</#if>
 </div>
 
 
 <ul id="return-ul-id" hidden="hidden">
-	<li><a onclick="toUpdateExample();">修改</a></li>
-	<li><a onclick="deleteExample();">删除</a></li>
-	<li><a onclick="showAddParameterReturn();">添加返回值参数</a></li>
+	<li><a onclick="updateExample();">保存</a></li>
+	<!-- <li><a onclick="toUpdateExample();">修改</a></li> -->
+	<!-- <li><a onclick="deleteExample();">删除</a></li> -->
+	<li><a onclick="showAddParameterReturn();">添加参数说明</a></li>
 </ul>
 
 

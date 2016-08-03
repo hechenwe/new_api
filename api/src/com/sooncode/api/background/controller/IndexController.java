@@ -54,23 +54,23 @@ public class IndexController {
 		User user = new User();
 		user.setUserName(userName);
 		// List<User> users = userService.selectUserPage(user, 1, 1).getLists();
-		user = userService.userDao.get(user);// (user, 1, 1).getLists();
+		User newUser = userService.userDao.get(user);// (user, 1, 1).getLists();
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		if (user != null && user.getPassword().equals(Md5.GetMD5Code(password))) {
+		if (newUser != null && newUser.getPassword().equals(Md5.GetMD5Code(password))) {
 			// if ( users.size()==1 &&
 			// users.get(0).getPassword().equals(password)) {//
 
-			session.setAttribute("user", user);
-			map.put("userId", user.getUserId());
+			session.setAttribute("user", newUser);
+			map.put("userId", newUser.getUserId());
 
 			Company company = new Company();
 
-			company.setCompanyId(user.getCompanyId());
+			company.setCompanyId(newUser.getCompanyId());
 
 			company = companyService.companyDao.get(company);
 
-			List<User> users = userService.userDao.getPager(1L, 1L, user, new Role(), new Company()).getLists(); 
+			List<User> users = userService.userDao.getPager(1L, 1L, newUser, new Role(), new Company()).getLists(); 
 				
 			 																				 
 			if (users != null && users.size() == 1) {

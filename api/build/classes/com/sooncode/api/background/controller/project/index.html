@@ -249,7 +249,7 @@
 		</table>
 		<#else>
 		<h6>
-					<textarea  data-key="${interfac.interfacId}" data-toggle="context" data-target="#context-menu" id="textarea-${interfac.interfacId}"    style="width: 98.11%" name="jsonString"   class="textarea-js  form-control-textarea" rows="5">${interfac.jsonParameters!}</textarea>
+					<textarea spellcheck="false" data-key="${interfac.interfacId}" data-toggle="context" data-target="#context-menu" id="textarea-${interfac.interfacId}"    style="width: 98.11%" name="jsonString"   class="textarea-js  form-control-textarea" rows="5">${interfac.jsonParameters!}</textarea>
 					<br>
 					<p style="margin-left: 0px; margin-right: 16px;" align="right">
 						<a onclick=" "><small id=" ">格式化JSON</small></a>
@@ -395,7 +395,7 @@
 									</#if>
                                  
                                     -->
-								  <pre  style="margin-right: 10px;"><small id = "pre-${example.exampleId}">${example.exampleContent}</small></pre>
+								  <pre spellcheck="false" style="margin-right: 10px;"><small id = "pre-${example.exampleId}">${example.exampleContent}</small></pre>
 							      <p style="margin-right: 10px;" align="right">
 								      <a onclick="formatJson('pre-${example.exampleId}');">
 								      		<small id="small_pre-${example.exampleId}">格式化JSON</small>
