@@ -12,7 +12,7 @@
 <#if interfac.parameterFormat == "JSON" >
 
 
-<form  target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="../spanRequestController/request.html" method="POST">
+<form  target="${interfac.interfacId}_iframe"   action="../spanRequestController/request.html" method="POST">
 	 
 	<h6>
 	   <!--  <pre  name="jsonString" style="margin-right: 10px;"><small  id = "pre-try-${interfac.interfacId}">${interfac.jsonParameters!}</small></pre>
@@ -23,7 +23,7 @@
 	    </p>  -->
 	
 	
-		 <textarea  style="width:99.11%" name="jsonString" id="pre-${interfac.interfacId}" class="form-control-textarea textarea" rows="5">${interfac.jsonParameters!}</textarea> 
+		 <textarea  style="width:100%" name="jsonString" id="pre-${interfac.interfacId}" class="form-control-textarea textarea" rows="5">${interfac.jsonParameters!}</textarea> 
 	        <br>
 	        <p style="margin-left: 0px; margin-right: 16px;" align="right">
 	        <a onclick="formatJson('pre-${interfac.interfacId}');"><small id="small_pre-${interfac.interfacId}">格式化JSON</small></a></p> 
@@ -32,14 +32,14 @@
 	 
 	<input type="hidden" id="url-${interfac.interfacId}" name="url" value="${interfac.url}"> 
 	 
-	<button style="margin-left: -30px;" class="btn btn-default" type="submit">
+	<button style="margin-left: 0px;color:#FFAA2F" class="btn btn-default" type="submit">
 		<font size="0.5">提交</font>
 	</button>
 </form>
 <#elseif interfac.parameterFormat == "FILE">
 
  
-	<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left: 30px; width:100%;"  action="${interfac.url}" method="${interfac.requestType}" enctype="multipart/form-data">
+	<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left:0px; width:100%;"  action="${interfac.url}" method="${interfac.requestType}" enctype="multipart/form-data">
 		 <#if interfac.parameters ?? >
 		  
 	     <#list interfac.parameters as parameter>
@@ -64,11 +64,14 @@
 		 </#list>
 		 
 		 </#if>
-	    <br> <button style="margin-left: -30px;margin-top:20px;" class="btn btn-default" type="submit"><font size="0.5">提交</font></button>
+	    <br> 
+	    <button style="margin-left: 0px;color:#FFAA2F" class="btn btn-default" type="submit">
+		<font size="0.5">提交</font>
+	    </button>
       </form>
 
 <#else>
-<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="${interfac.url}" method="${interfac.requestType}">
+<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left:0px;" action="${interfac.url}" method="${interfac.requestType}">
 	<#if interfac.parameters ?? > <#list interfac.parameters as parameter>
 	<h6>
 		${parameter.parameterCode}:
@@ -87,7 +90,7 @@
 		</#if>
 	</h6>
 	</#list> </#if>
-	<button onclick="SetWinHeight('${interfac.interfacId}')" style="margin-left: -30px;" class="btn btn-default btn-xs" type="submit">
+	<button style="margin-left: 0px;color:#FFAA2F" class="btn btn-default" type="submit">
 		<font size="0.5">提交</font>
 	</button>
 </form>
@@ -97,7 +100,7 @@
 <div style="border: 1px solid #E4E1E1;  height:200px; width: 100%;">
 <iframe  frameborder="0" border="0" ; marginwidth="0" marginheight="0" style=" height:200px; width: 100%;" id="${interfac.interfacId}_iframe" name="${interfac.interfacId}_iframe"></iframe>
 </div>
-<a onclick="hah('${interfac.interfacId}_iframe');">Json</a>
+<!-- <a onclick="hah('${interfac.interfacId}_iframe');">Json</a> -->
 <script type="text/javascript">
 	function hah(id){
 		alert($(document.getElementById(id).contentWindow.document.body).html());

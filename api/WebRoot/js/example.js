@@ -44,10 +44,13 @@ function updateExample() {
 
 	var exampleType = "SUCCESS";// $("#"+ interfacId +"exampleType").val();
 	var exampleContent = $("#" + exampleId).val();
-
-	var urlString = "../example/updateExample.html" + "?exampleId=" + exampleId + "&exampleType=" + exampleType + "&exampleContent=" + exampleContent;
+  
+	var urlString = "../example/updateExample.html";
 	// alert(urlString);
-	$.get(urlString, function(data) {
+	
+	 
+	$.post(urlString,{"exampleId":exampleId,"exampleContent":exampleContent,"exampleType":exampleType}, function(data) {
+		  
         if(data=="1"){
         	alert("保存成功！");//$("#" + exampleId).val(exampleContent);
         }else{

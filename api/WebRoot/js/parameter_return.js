@@ -5,6 +5,7 @@ function showAddParameterReturn(){
 	 var exampleId = dataKeys[1]; 
 	 var url = "../parameterRetur/toAddParameterRueturn.html?exampleId="+exampleId;
 	 $.get(url, function(data) {
+		 $("#"+exampleId+"-div").removeClass("div-display");
 		 $("#"+exampleId+"-div").append(data);
 	})	
 }
@@ -30,8 +31,8 @@ function saveEaxmpleRetur(exampleId) {
 	var parameterDataType = $("#"+ exampleId +"parameterDataType").val();
 	var minLength = $("#"+ exampleId +"minLength").val();
 	var maxLength = $("#"+ exampleId +"maxLength").val();
-	var parameterExample = $("#"+ exampleId +"parameterExample").val();
-	var parameterExplain = $("#"+ exampleId +"parameterExplain").val();
+	var parameterExample = $("#"+ exampleId +"_parameterExample").val();//parameterExample
+	var parameterExplain = $("#"+ exampleId +"_parameterExample").val();
 	var isMust = $('input[name="'+ exampleId +'isMust"]:checked').val();
 	//var isMust = $('input[name="isMust"]:checked').val();
 	var weight = $("#"+ exampleId +"weight").val();

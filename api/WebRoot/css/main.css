@@ -72,4 +72,6 @@ a {
 	 
 	color: #337ab7;
 }
+/*iframbody*/
+.iframBody>body{background:#000;color:#fff;}
  

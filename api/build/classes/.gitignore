@@ -1,6 +1,3 @@
-/api_db.properties
-/applicationContext.xml
-/c3p0.properties
 /com/
 /dispatcherServlet.xml
 /log4j.xml

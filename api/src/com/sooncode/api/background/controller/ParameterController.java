@@ -76,6 +76,7 @@ public class ParameterController {
 		}
 		  Map<String,Object> map = new HashMap<>();
 		  map.put("parameter",p);
+		  
 		return new ModelAndView("parameter/table_tr_parameter",map);
 
 	}

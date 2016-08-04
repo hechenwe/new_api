@@ -10,11 +10,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sooncode.api.background.entity.Example;
 import com.sooncode.api.background.service.ExampleService;
+import com.sooncode.api.background.util.HttpServletStream;
 import com.sooncode.api.background.util.RequestUtil;
  
 
@@ -89,9 +91,10 @@ public class ExampleController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("/updateExample")
+	@RequestMapping(value="/updateExample",method=RequestMethod.POST)
 	@ResponseBody
 	public String updateExample(HttpServletRequest request) {
+		//String json = HttpServletStream.getString(request);
 		
 		String exampleId = RequestUtil.getString(request, "exampleId");
 		String exampleType = RequestUtil.getString(request, "exampleType");

@@ -27,7 +27,7 @@
 							<input onchange="choosMaxLength('${pr.exampleId}');" class="form-control" id="${pr.exampleId}maxLength" placeholder="最大长度" value="${pr.maxLength!}">
 						</div>
 						<div id = "div-example-${pr.exampleId}" class="form-group">
-							<input class="form-control" id="${pr.exampleId}parameterExample" placeholder="示例" value="${pr.parameterExample!}">
+							<input class="form-control" id="${pr.exampleId}_parameterExample" placeholder="示例" value="${pr.parameterExample!}">
 						</div>
 						<div class="form-group">
 							<span style="margin-left:0px;"><b>是否必须 :</b></span> <input type="radio" name="${pr.exampleId}isMust" checked="checked" value="1">必须 <input type="radio" name="${pr.exampleId}isMust" value="0">可选
@@ -59,8 +59,8 @@
   function choosMaxLength(exampleId) {
 
 		var maxLength = $("#"+exampleId+"maxLength").val();
-		var textarea = '<textarea id="parameterExample" class="form-control" rows="3"></textarea>';
-		var inputString = '<input id="parameterExample" class="form-control" placeholder=" ">';
+		var textarea = '<textarea id="'+exampleId+'_parameterExample" class="form-control" rows="3"></textarea>';
+		var inputString = '<input id="'+exampleId+'_parameterExample" class="form-control" placeholder=" ">';
 
 		$("#div-example-"+exampleId).children("input").remove();
 		$("#div-example-"+exampleId).children("textarea").remove();
@@ -72,6 +72,9 @@
 	}
   
   function colse_div(exampleId){
-	  $("#"+exampleId).addClass("div-display");
+	  
+	  //$("#"+exampleId+"-div").addClass("div-display");
+	  $("#"+exampleId+"-div").empty();
+	  $("#"+exampleId+"-div").addClass("div-display");
   }
 </script>

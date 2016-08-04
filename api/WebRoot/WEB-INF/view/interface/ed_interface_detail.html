@@ -7,17 +7,19 @@
 </#if>
 <div>
 	<#-- 参数 开始  -->
-<h6><img class="img" id="img_parameter_${interfac.interfacId}" onclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');" src="../images/left.png">&nbsp;&nbsp; <b><a ondblclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');">参数 :</a></b>&nbsp;&nbsp;</h6>
+	<hr  style="height: 1px; border: none; border-top: 1px dashed #B2B8BD;" />
+    <h6><img class="img" id="img_parameter_${interfac.interfacId}" onclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');" src="../images/left.png">&nbsp;&nbsp; <b><a ondblclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');">参数 :</a></b>&nbsp;&nbsp;</h6>
 	 
 	<#-- 参数table -->
 	<#if interfac.parameterFormat =="JSON"> 
-				<h6>
+		<h6>
 					<textarea spellcheck="false"  data-key="${interfac.interfacId}" data-toggle="context" data-target="#context-menu" id="textarea-${interfac.interfacId}"    style="width:99.4%" name="jsonString"   class="textarea-js textarea form-control-textarea" rows="5">${interfac.jsonParameters!}</textarea>
 					<br>
 					<p style="margin-left: 0px; margin-right: 16px;" align="right">
 						 <a onclick="formatJson('textarea-${interfac.interfacId}');"><small id="small_textarea-${interfac.interfacId}">格式化JSON</small></a> 
 					</p>
 		</h6>
+		    <h6>参数说明:</h6>
 			<#include "../parameter/table_parameter.html"/> 
 			<div class="div-display" id="div_parameter${interfac.interfacId}">
 			<#include "../parameter/add_parameter.html"/>
@@ -37,8 +39,11 @@
 	<#-- 参数  结束 -->
 
 	<#--  返回示例  开始 -->
-	
-	<h6><img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp; <b><a ondblclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')">返回示例 :</a></b>&nbsp;&nbsp;</h6>
+    <div>
+    	<span style="height:1px;">&nbsp;</span>
+    	<hr style="height: 1px; border: none; border-top: 1px dashed #B2B8BD;" />
+    	<h6><img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp; <b><a ondblclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')">返回示例 :</a></b>&nbsp;&nbsp;</h6>
+    </div>
 
 	<#include "../example/add_example.html"/>
 	<#--  添加返回示例 -->
@@ -46,11 +51,18 @@
 	<#------------------- 返回值示例 ---------------结束 -->
 
 	<div class="col-lg-12" id="div-exam-${interfac.interfacId}"></div>
+	
 	<#include "../parameter_return/table_return_example.html"/>
 	<#-- 返回示例模块 -->
 	<div class="span-4" id="div-example${interfac.interfacId}"></div>
-
-	<h6><b><img class="img" id="img_try_${interfac.interfacId}" onclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<a ondblclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')"> <font color="#FFAA2F">试一试</font></a></b></h6>
+	
+    <#-- 试一试 -->
+    <hr style="height: 1px; border: none; border-top: 1px dashed #B2B8BD;" />
+	<h6>
+	<b>
+	<img class="img" id="img_try_${interfac.interfacId}" onclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<a ondblclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')"> <font color="#FFAA2F">试一试</font></a>
+	</b>
+	</h6>
 	
 	<#include "../com/try.html"/>
 	<#-- 试一试 -->
